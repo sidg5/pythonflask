@@ -2,6 +2,9 @@ from flask import Flask
 app = Flask(__name__)
 
 from datetime import datetime
+import os
+
+env_var = os.environ
 
 @app.route('/hello')
 def hello_geek():
@@ -16,4 +19,6 @@ def currentTime():
     return current_time
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    print(env_var)
+    port = env_var.get("PORT", 5001)
+    app.run(debug=False, port=port)
